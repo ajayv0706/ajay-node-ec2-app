@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Ajay V | Cloud & DevOps Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="top-nav">
+    <div class="logo">Ajay<span>.</span></div>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#projects">Projects</a>
+      <a href="#education">Education</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="home">
+    <div class="hero-text">
+      <h1>Hi, I'm <span>Ajay V</span> 👋</h1>
+      <h2>Cloud & DevOps | AWS | CI/CD | Node.js</h2>
+      <p>
+        I build cloud-based applications, automate deployments, and love
+        working with AWS, DevOps tools, and modern web technologies.
+      </p>
+      <div class="hero-buttons">
+        <a href="#projects" class="btn primary">View Projects</a>
+        <a href="#contact" class="btn ghost">Contact Me</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="about" class="section">
+    <h2>About Me</h2>
+    <p>
+      I'm a BCA graduate and cloud/DevOps enthusiast. I've worked with AWS EC2,
+      Linux, NGINX, GitHub Actions, and PM2 to build real-world deployment
+      pipelines. My goal is to grow into roles across Cloud Support, DevOps,
+      or SRE while also exploring UI/UX and product-focused work.
+    </p>
+  </section>
+
+  <section id="skills" class="section">
+    <h2>Skills</h2>
+    <div class="pill-grid">
+      <span>AWS EC2</span>
+      <span>Linux / Ubuntu</span>
+      <span>NGINX</span>
+      <span>Git & GitHub</span>
+      <span>GitHub Actions (CI/CD)</span>
+      <span>PM2</span>
+      <span>Node.js / Express</span>
+      <span>HTML / CSS</span>
+      <span>Basic Networking</span>
+      <span>DevOps Foundations</span>
+      <span>Cloud & Infrastructure Basics</span>
+    </div>
+  </section>
+
+  <section id="projects" class="section">
+    <h2>Projects</h2>
+
+    <div class="project-card">
+      <h3>1. Node.js CI/CD Deployment to AWS EC2</h3>
+      <p>
+        Deployed a Node.js application to an AWS EC2 instance using
+        <strong>GitHub Actions</strong> for CI/CD, <strong>PM2</strong> for
+        process management, and <strong>NGINX</strong> as a reverse proxy.
+        Each push to <code>main</code> triggers automatic deployment with zero
+        manual steps.
+      </p>
+      <ul>
+        <li>GitHub → CI/CD → SSH to EC2 → <code>git pull</code> → PM2 restart</li>
+        <li>Automated, repeatable, production-style workflow</li>
+        <li>Live URL: <code>http://51.20.56.207</code></li>
+      </ul>
+      <a class="project-link" href="https://github.com/ajayv0706/ajay-node-ec2-app" target="_blank">
+        View Source on GitHub ↗
+      </a>
+    </div>
+
+    <div class="project-card">
+      <h3>2. Future Projects</h3>
+      <p>
+        I’m actively working on adding more projects in areas like DevOps,
+        frontend development, and data/analytics.
+      </p>
+      <ul>
+        <li>AWS-hosted personal portfolio with custom domain</li>
+        <li>Monitoring & logging setup for Node.js apps</li>
+        <li>More automation with Bash, Terraform, or Docker</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="education" class="section">
+    <h2>Education</h2>
+    <ul class="edu-list">
+      <li><strong>Bachelor of Computer Applications (BCA)</strong></li>
+      <li>Certification: DevOps & Cloud Computing (Boston Institute of Analytics)</li>
+      <li>Actively learning: Data Science & AI, UI/UX, and Product Management basics</li>
+    </ul>
+  </section>
+
+  <section id="contact" class="section">
+    <h2>Contact</h2>
+    <p>Interested in working together or have an opportunity?</p>
+    <div class="pill-grid">
+      <span>📧 Email: your-email-here</span>
+      <span>🔗 LinkedIn: your-linkedin-here</span>
+      <span>💻 GitHub: <a href="https://github.com/ajayv0706" target="_blank">ajayv0706</a></span>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> Ajay V · Built with Node.js, AWS EC2, PM2 & NGINX · CI/CD powered by GitHub Actions</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
