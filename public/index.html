@@ -3,124 +3,844 @@
 <head>
   <meta charset="UTF-8" />
   <title>Ajay V | Cloud & DevOps Portfolio</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    :root {
+      --bg: #050816;
+      --card-bg: rgba(15, 23, 42, 0.8);
+      --accent: #22d3ee;
+      --accent-soft: rgba(56, 189, 248, 0.25);
+      --text-main: #e5e7eb;
+      --text-sub: #9ca3af;
+      --border-glass: rgba(148, 163, 184, 0.4);
+      --shadow-glass: 0 24px 60px rgba(15, 23, 42, 0.85);
+      --radius-xl: 26px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #0b1120 10%, #020617 60%, #020617 100%);
+      color: var(--text-main);
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* Layout */
+
+    .page {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 32px 20px 80px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 40px;
+    }
+
+    .logo {
+      font-size: 1.35rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .logo-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 25px rgba(34,211,238,0.9);
+    }
+
+    nav {
+      display: flex;
+      gap: 18px;
+      font-size: 0.95rem;
+      color: var(--text-sub);
+    }
+
+    nav a {
+      position: relative;
+      padding-bottom: 4px;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 0;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--accent), #818cf8);
+      transition: width 0.25s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* Glass cards */
+
+    .glass {
+      background: var(--card-bg);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-glass);
+      box-shadow: var(--shadow-glass);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
+    }
+
+    /* Hero */
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.6fr);
+      gap: 28px;
+      margin-bottom: 40px;
+    }
+
+    .hero-main {
+      padding: 32px 32px 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-main::before {
+      content: "";
+      position: absolute;
+      inset: -80px;
+      background:
+        radial-gradient(circle at top left, rgba(56,189,248,0.16), transparent 60%),
+        radial-gradient(circle at bottom right, rgba(129,140,248,0.16), transparent 60%);
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .badge-row {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 4px 10px 4px 4px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.5);
+      background: rgba(15,23,42,0.8);
+      margin-bottom: 16px;
+    }
+
+    .badge-pill {
+      background: radial-gradient(circle at 0% 0%, #22d3ee, #0ea5e9);
+      color: #0b1120;
+      font-weight: 600;
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 12px;
+      border-radius: 999px;
+    }
+
+    .badge-label {
+      font-size: 0.82rem;
+      color: var(--text-sub);
+    }
+
+    .hero-title {
+      font-size: clamp(2.35rem, 3vw, 2.7rem);
+      line-height: 1.15;
+      margin-bottom: 18px;
+    }
+
+    .hero-title span.name {
+      color: var(--accent);
+    }
+
+    .hero-subtitle {
+      font-size: 0.98rem;
+      color: var(--text-sub);
+      max-width: 540px;
+      margin-bottom: 22px;
+    }
+
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    .hero-tag {
+      font-size: 0.8rem;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.4);
+      background: rgba(15,23,42,0.9);
+      color: var(--text-sub);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .btn-primary,
+    .btn-ghost {
+      font-size: 0.95rem;
+      padding: 10px 18px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #22d3ee, #818cf8);
+      color: #020617;
+      box-shadow: 0 16px 40px rgba(56,189,248,0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 18px 46px rgba(56,189,248,0.45);
+    }
+
+    .btn-ghost {
+      background: rgba(15,23,42,0.85);
+      border-color: rgba(148,163,184,0.6);
+      color: var(--text-main);
+    }
+
+    .btn-ghost:hover {
+      background: rgba(15,23,42,1);
+      transform: translateY(-1px);
+      box-shadow: 0 16px 36px rgba(15,23,42,0.9);
+    }
+
+    .hero-side {
+      padding: 22px 22px 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .hero-side-title {
+      font-size: 0.86rem;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-sub);
+      margin-bottom: 4px;
+    }
+
+    .hero-points {
+      font-size: 0.84rem;
+      color: var(--text-sub);
+      list-style: none;
+    }
+
+    .hero-points li {
+      margin-bottom: 6px;
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+    }
+
+    .hero-points span.dot {
+      width: 5px;
+      height: 5px;
+      margin-top: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .hero-meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 0.8rem;
+      color: var(--text-sub);
+      border-top: 1px solid rgba(30,64,175,0.7);
+      padding-top: 12px;
+      margin-top: 6px;
+    }
+
+    .hero-meta span {
+      opacity: 0.9;
+    }
+
+    /* Sections */
+
+    section {
+      margin-bottom: 30px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+
+    .section-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--text-sub);
+    }
+
+    .section-pill {
+      font-size: 0.75rem;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(15,23,42,0.8);
+      border: 1px solid rgba(148,163,184,0.5);
+      color: var(--text-sub);
+    }
+
+    /* About */
+
+    .about {
+      padding: 20px 24px 18px;
+      line-height: 1.6;
+      font-size: 0.95rem;
+      color: var(--text-sub);
+    }
+
+    /* Skills */
+
+    .skills {
+      padding: 18px 22px 20px;
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      font-size: 0.8rem;
+      padding: 6px 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(148,163,184,0.5);
+      background: rgba(15,23,42,0.95);
+      color: var(--text-sub);
+    }
+
+    /* Grid layout */
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 22px;
+      margin-bottom: 10px;
+    }
+
+    /* Timeline */
+
+    .timeline {
+      padding: 18px 22px;
+      font-size: 0.9rem;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 18px;
+      margin-bottom: 16px;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 4px;
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(34,211,238,0.9);
+    }
+
+    .timeline-item::after {
+      content: "";
+      position: absolute;
+      left: 7px;
+      top: 14px;
+      width: 1px;
+      bottom: -8px;
+      background: linear-gradient(to bottom, rgba(148,163,184,0.7), transparent);
+    }
+
+    .timeline-item:last-child::after {
+      display: none;
+    }
+
+    .timeline-title {
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .timeline-meta {
+      font-size: 0.8rem;
+      color: var(--text-sub);
+      margin-bottom: 5px;
+    }
+
+    .timeline-body {
+      color: var(--text-sub);
+      line-height: 1.5;
+    }
+
+    /* Projects */
+
+    .project-card {
+      padding: 18px 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-tag {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--text-sub);
+      margin-bottom: 2px;
+    }
+
+    .project-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .project-desc {
+      font-size: 0.88rem;
+      color: var(--text-sub);
+      margin-bottom: 10px;
+    }
+
+    .project-meta {
+      font-size: 0.8rem;
+      color: var(--text-sub);
+      margin-bottom: 8px;
+    }
+
+    .project-links {
+      display: flex;
+      gap: 10px;
+      font-size: 0.82rem;
+    }
+
+    .project-links a {
+      color: var(--accent);
+    }
+
+    .project-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at top right, rgba(56,189,248,0.13), transparent);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .project-card:hover::after {
+      opacity: 1;
+    }
+
+    /* Experience */
+
+    .exp-card {
+      padding: 18px 22px;
+      font-size: 0.9rem;
+    }
+
+    .exp-title {
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .exp-meta {
+      font-size: 0.82rem;
+      color: var(--text-sub);
+      margin-bottom: 8px;
+    }
+
+    .exp-list {
+      padding-left: 16px;
+      color: var(--text-sub);
+      line-height: 1.5;
+      font-size: 0.9rem;
+    }
+
+    .exp-list li { margin-bottom: 4px; }
+
+    /* Contact */
+
+    .contact {
+      padding: 18px 22px 16px;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      font-size: 0.9rem;
+      color: var(--text-sub);
+    }
+
+    .contact-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .contact-links a {
+      color: var(--accent);
+      border-bottom: 1px dashed rgba(34,211,238,0.4);
+      padding-bottom: 2px;
+    }
+
+    footer {
+      margin-top: 22px;
+      text-align: center;
+      font-size: 0.78rem;
+      color: #4b5563;
+    }
+
+    /* Responsive */
+
+    @media (max-width: 900px) {
+      .hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 720px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+
+      .hero-main {
+        padding: 22px 20px 20px;
+      }
+
+      .hero-side {
+        padding: 18px 18px 16px;
+      }
+
+      .grid-2 {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .page {
+        padding-inline: 16px;
+      }
+    }
+  </style>
 </head>
 <body>
-  <header class="top-nav">
-    <div class="logo">Ajay<span>.</span></div>
-    <nav>
-      <a href="#about">About</a>
-      <a href="#skills">Skills</a>
-      <a href="#projects">Projects</a>
-      <a href="#education">Education</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </header>
-
-  <section class="hero" id="home">
-    <div class="hero-text">
-      <h1>Hi, I'm <span>Ajay V</span> 👋</h1>
-      <h2>Cloud & DevOps | AWS | CI/CD | Node.js</h2>
-      <p>
-        I build cloud-based applications, automate deployments, and love
-        working with AWS, DevOps tools, and modern web technologies.
-      </p>
-      <div class="hero-buttons">
-        <a href="#projects" class="btn primary">View Projects</a>
-        <a href="#contact" class="btn ghost">Contact Me</a>
+  <div class="page">
+    <!-- NAV -->
+    <header>
+      <div class="logo">
+        <span class="logo-dot"></span> AJAY&nbsp;V
       </div>
-    </div>
-  </section>
+      <nav>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
 
-  <section id="about" class="section">
-    <h2>About Me</h2>
-    <p>
-      I'm a BCA graduate and cloud/DevOps enthusiast. I've worked with AWS EC2,
-      Linux, NGINX, GitHub Actions, and PM2 to build real-world deployment
-      pipelines. My goal is to grow into roles across Cloud Support, DevOps,
-      or SRE while also exploring UI/UX and product-focused work.
-    </p>
-  </section>
+    <!-- HERO -->
+    <section class="hero">
+      <div class="glass hero-main">
+        <div class="hero-inner">
+          <div class="badge-row">
+            <span class="badge-pill">Cloud · DevOps · Node.js</span>
+            <span class="badge-label">Building & shipping on AWS</span>
+          </div>
 
-  <section id="skills" class="section">
-    <h2>Skills</h2>
-    <div class="pill-grid">
-      <span>AWS EC2</span>
-      <span>Linux / Ubuntu</span>
-      <span>NGINX</span>
-      <span>Git & GitHub</span>
-      <span>GitHub Actions (CI/CD)</span>
-      <span>PM2</span>
-      <span>Node.js / Express</span>
-      <span>HTML / CSS</span>
-      <span>Basic Networking</span>
-      <span>DevOps Foundations</span>
-      <span>Cloud & Infrastructure Basics</span>
-    </div>
-  </section>
+          <h1 class="hero-title">
+            Hi, I'm <span class="name">Ajay V</span> 👋<br />
+            I love automating deployments and running apps in the cloud.
+          </h1>
 
-  <section id="projects" class="section">
-    <h2>Projects</h2>
+          <p class="hero-subtitle">
+            I’m a BCA graduate and DevOps enthusiast working with AWS EC2, Linux,
+            NGINX, GitHub Actions, and PM2 to build real-world deployment pipelines.
+            My goal is to grow into Cloud Support, DevOps, or SRE roles while also
+            exploring UI/UX and product-focused work.
+          </p>
 
-    <div class="project-card">
-      <h3>1. Node.js CI/CD Deployment to AWS EC2</h3>
-      <p>
-        Deployed a Node.js application to an AWS EC2 instance using
-        <strong>GitHub Actions</strong> for CI/CD, <strong>PM2</strong> for
-        process management, and <strong>NGINX</strong> as a reverse proxy.
-        Each push to <code>main</code> triggers automatic deployment with zero
-        manual steps.
-      </p>
-      <ul>
-        <li>GitHub → CI/CD → SSH to EC2 → <code>git pull</code> → PM2 restart</li>
-        <li>Automated, repeatable, production-style workflow</li>
-        <li>Live URL: <code>http://51.20.56.207</code></li>
-      </ul>
-      <a class="project-link" href="https://github.com/ajayv0706/ajay-node-ec2-app" target="_blank">
-        View Source on GitHub ↗
-      </a>
-    </div>
+          <div class="hero-tags">
+            <div class="hero-tag">AWS · EC2 · VPC · S3</div>
+            <div class="hero-tag">Node.js · Express</div>
+            <div class="hero-tag">Docker · NGINX</div>
+            <div class="hero-tag">GitHub Actions · CI/CD</div>
+            <div class="hero-tag">Linux · Shell</div>
+          </div>
 
-    <div class="project-card">
-      <h3>2. Future Projects</h3>
-      <p>
-        I’m actively working on adding more projects in areas like DevOps,
-        frontend development, and data/analytics.
-      </p>
-      <ul>
-        <li>AWS-hosted personal portfolio with custom domain</li>
-        <li>Monitoring & logging setup for Node.js apps</li>
-        <li>More automation with Bash, Terraform, or Docker</li>
-      </ul>
-    </div>
-  </section>
+          <div class="hero-actions">
+            <a href="#projects" class="btn-primary">
+              View Projects
+              <span>↗</span>
+            </a>
+            <a href="#contact" class="btn-ghost">
+              Contact Me
+            </a>
+          </div>
+        </div>
+      </div>
 
-  <section id="education" class="section">
-    <h2>Education</h2>
-    <ul class="edu-list">
-      <li><strong>Bachelor of Computer Applications (BCA)</strong></li>
-      <li>Certification: DevOps & Cloud Computing (Boston Institute of Analytics)</li>
-      <li>Actively learning: Data Science & AI, UI/UX, and Product Management basics</li>
-    </ul>
-  </section>
+      <aside class="glass hero-side">
+        <div>
+          <div class="hero-side-title">Now</div>
+          <ul class="hero-points">
+            <li><span class="dot"></span><span>Completed DevOps & Cloud Computing certification from Boston Institute of Analytics (Oct 2024 – Jul 2025).</span></li>
+            <li><span class="dot"></span><span>Deploying Node.js / MEAN apps to AWS EC2 with CI/CD pipelines and monitoring.</span></li>
+            <li><span class="dot"></span><span>Exploring better portfolio designs and product thinking.</span></li>
+          </ul>
+        </div>
 
-  <section id="contact" class="section">
-    <h2>Contact</h2>
-    <p>Interested in working together or have an opportunity?</p>
-    <div class="pill-grid">
-      <span>📧 Email: your-email-here</span>
-      <span>🔗 LinkedIn: your-linkedin-here</span>
-      <span>💻 GitHub: <a href="https://github.com/ajayv0706" target="_blank">ajayv0706</a></span>
-    </div>
-  </section>
+        <div class="hero-meta">
+          <span>📍 Bengaluru, India</span>
+          <span>Open to Cloud / DevOps roles</span>
+        </div>
+      </aside>
+    </section>
 
-  <footer class="footer">
-    <p>© <span id="year"></span> Ajay V · Built with Node.js, AWS EC2, PM2 & NGINX · CI/CD powered by GitHub Actions</p>
-  </footer>
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="glass about">
+        <div class="section-header">
+          <h2 class="section-title">About Me</h2>
+        </div>
+        <p>
+          I’m a BCA graduate who enjoys turning ideas into running systems. I’ve worked
+          with AWS EC2, VPC, CloudWatch, NGINX, GitHub Actions, and PM2, and I like
+          using automation to keep deployments reliable and repeatable.
+        </p>
+        <br />
+        <p>
+          I also have hands-on experience building full-stack apps, deploying them with
+          Docker and reverse proxies, and documenting every step like a proper runbook.
+          Long term, I see myself growing into a Cloud Support, DevOps Engineer, or SRE
+          while still staying close to design and user experience.
+        </p>
+      </div>
+    </section>
+
+    <!-- SKILLS + PROJECTS -->
+    <section class="grid-2">
+      <!-- SKILLS -->
+      <div id="skills" class="glass skills">
+        <div class="section-header">
+          <h2 class="section-title">Skills</h2>
+          <span class="section-pill">Current stack</span>
+        </div>
+        <div class="chips">
+          <span class="chip">AWS EC2 / VPC / IAM / CloudWatch</span>
+          <span class="chip">Node.js · Express</span>
+          <span class="chip">Docker & Containers</span>
+          <span class="chip">NGINX Reverse Proxy</span>
+          <span class="chip">Git & GitHub</span>
+          <span class="chip">GitHub Actions CI/CD</span>
+          <span class="chip">Linux · Shell</span>
+          <span class="chip">MongoDB / SQL basics</span>
+          <span class="chip">HTML · CSS · JavaScript</span>
+          <span class="chip">Java & Python (foundations)</span>
+        </div>
+      </div>
+
+      <!-- FEATURED PROJECT -->
+      <div id="projects" class="glass project-card">
+        <div class="section-header" style="margin-bottom: 10px;">
+          <h2 class="section-title">Highlight Project</h2>
+          <span class="section-pill">DevOps & MEAN</span>
+        </div>
+
+        <div class="project-tag">End-to-End DevOps Project</div>
+        <div class="project-title">
+          MEAN CRUD Application – DevOps Deployment
+        </div>
+        <p class="project-desc">
+          Deployed a containerized MEAN application using Docker for frontend, backend,
+          and database. Configured NGINX as a reverse proxy and hosted the stack on AWS
+          EC2.
+        </p>
+        <p class="project-meta">
+          Implemented GitHub Actions CI/CD to automatically build and deploy on push.
+          Documented each step, troubleshooting notes, and created a deployment runbook
+          to make the setup repeatable.
+        </p>
+        <div class="project-links">
+          <a href="https://github.com/ajayv0706/mean-crud-devops" target="_blank" rel="noreferrer">
+            GitHub Repo ↗
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- MORE PROJECTS + EXPERIENCE -->
+    <section class="grid-2">
+      <!-- PROJECTS 2 -->
+      <div class="glass project-card">
+        <div class="section-header" style="margin-bottom: 10px;">
+          <h2 class="section-title">Cloud & Network Projects</h2>
+        </div>
+
+        <div class="project-tag">AWS Networking</div>
+        <div class="project-title">
+          Understanding Subnet Types – Public, Private, Hybrid
+        </div>
+        <p class="project-desc">
+          Designed and implemented VPC architectures with public, private, and hybrid
+          subnets for secure application deployment.
+        </p>
+        <p class="project-meta">
+          Automated infrastructure provisioning using CloudFormation and monitored
+          performance with CloudWatch, focusing on reliability and uptime. Configured
+          EC2 instances across multiple subnets with Internet and NAT Gateways for
+          controlled access.
+        </p>
+
+        <div class="project-tag" style="margin-top: 12px;">CI/CD & Portfolio</div>
+        <div class="project-title">
+          Node.js CI/CD Portfolio on AWS EC2
+        </div>
+        <p class="project-desc">
+          This very website is deployed on AWS EC2 using a GitHub Actions pipeline.
+          Every push to the main branch triggers a build, pulls the latest code on EC2,
+          and restarts the Node.js app with PM2 behind NGINX.
+        </p>
+      </div>
+
+      <!-- EXPERIENCE -->
+      <div id="experience" class="glass exp-card">
+        <div class="section-header">
+          <h2 class="section-title">Experience</h2>
+          <span class="section-pill">Internship</span>
+        </div>
+
+        <div>
+          <div class="exp-title">Full Stack Web Developer Intern – Unified Mentor</div>
+          <div class="exp-meta">Apr 2024 – May 2024</div>
+          <ul class="exp-list">
+            <li>Created and tested APIs for smooth data flow between front-end and back-end.</li>
+            <li>Helped debug, test, and improve website performance and content delivery.</li>
+            <li>Developed and maintained responsive web pages to improve accessibility and UX.</li>
+            <li>Collaborated with the UI/UX team to design interactive layouts and engagement flows.</li>
+            <li>Learned how content design, automation, and analytics support digital marketing goals.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION -->
+    <section id="education" class="grid-2">
+      <div class="glass timeline">
+        <div class="section-header">
+          <h2 class="section-title">Education</h2>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-title">Bachelor of Computer Applications (BCA)</div>
+          <div class="timeline-meta">Graduate · Focus on programming & CS fundamentals</div>
+          <div class="timeline-body">
+            Built a strong foundation in programming, data structures, and software development, which now supports my work in DevOps and cloud technologies.
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-title">Java & Python Programming – The Skill Factory</div>
+          <div class="timeline-meta">Nov 2022</div>
+          <div class="timeline-body">
+            Gained hands-on experience with Java and Python, building console and small
+            application projects that strengthened my programming mindset.
+          </div>
+        </div>
+      </div>
+
+      <div class="glass timeline">
+        <div class="section-header">
+          <h2 class="section-title">Certifications</h2>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-title">
+            DevOps and Cloud Computing – Boston Institute of Analytics
+          </div>
+          <div class="timeline-meta">Oct 2024 – Jul 2025</div>
+          <div class="timeline-body">
+            Completed a certification focused on AWS, CI/CD, infrastructure automation
+            and monitoring. Worked on projects with EC2, VPCs, subnets, CloudFormation,
+            and CloudWatch to simulate real-world deployments.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <div class="glass contact">
+        <div>
+          <div class="section-title" style="margin-bottom: 6px;">Contact</div>
+          <div>Let’s talk about cloud, DevOps, or a role you think I’d be a good fit for.</div>
+        </div>
+        <div class="contact-links">
+          <a href="mailto:rockajay7113@gmail.com">rockajay7113@gmail.com</a>
+          <a href="mailto:ajayv_71@outlook.com">ajayv_71@outlook.com</a>
+          <a href="https://www.linkedin.com/in/ajay-v07/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+          <a href="https://github.com/ajayv0706" target="_blank" rel="noreferrer">GitHub ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © <span id="year"></span> Ajay V · Built with Node.js, AWS EC2, NGINX & GitHub Actions
+    </footer>
+  </div>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
+

@@ -1,17 +1,18 @@
 const express = require('express');
 const path = require('path');
-const app = express();
-const PORT = 3000;
 
-// Serve static files from /public
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Serve everything inside /public as static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Simple health check endpoint for debugging / monitoring
-app.get('/health', (req, res) => {
-  res.json({ status: 'ok', message: 'Ajay portfolio is live', time: new Date() });
+// Fallback to index.html for any route (single-page app)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
 app.listen(PORT, () => {
-  console.log(`Server running on http://0.0.0.0:${PORT}`);
+  console.log(`Ajay portfolio running on http://0.0.0.0:${PORT}`);
 });
 
